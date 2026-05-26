@@ -1,8 +1,8 @@
-# Hi, I'm [Your Name]!
+# Hi, I'm Bryan Ramirez!
 ## About Me
-- I'm in [grade] at [school name]
-- I enjoy: [list 2-3 interests]
+- I'm in eleventh at Energy Tech Highschool
+- I enjoy: Chess, football, and biking.
 ## Why I'm Taking This Course
-[Write 1-2 sentences about your goal]
+To create a working site that could be useful.
 ## What I Want to Build
 [What would you like to create by the end of this unit?]
