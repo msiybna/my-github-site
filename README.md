@@ -5,7 +5,5 @@
 ## Why I'm Taking This Course
 To create a good portfolio that will mirror my work and show employers my works.
 ## What I Want to Build
-[What would you like to create by the end of this unit?]
-## Collaborators
+A website that reflects me and who I am at at least the basic level.
 
-## Additional Question
