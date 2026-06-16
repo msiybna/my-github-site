@@ -1,13 +1,13 @@
-<!-- CODE HONESTY DECLARATION<br>
+ <!-- CODE HONESTY DECLARATION<br>
      Student: [Bryan Ramirez]<br>
      Date: [6/16/2026]<br>
      ───────────────────────────────────────────<br>
-     Feature added: [Darkmode toggle, blueish background, Timer, Fade-in from above animation]<br>
+     Feature added: [Darkmode toggle, blueish background, Timer]<br>
      AI tool used: [Gemini]<br>
-     What AI generated: [The AI generated code that worked for the features mentioned, something it wrote was using colors background and creating a bordered area text would remain white, and added CSS keyframes for a slide-down fade-in animation]<br>
+     What AI generated: [The AI generated code that worked for the features mentioned, something it wrote was using colors background and creating a bordered area text would remain white]<br>
      What I modified: [I just made sure the text remained the same and any mistakes the AI made were corrected.]<br>
      What I did NOT understand: [Mostly how it made the features appear like mainly the dark mode button, I wasn't fully sure how it made it appear on the screen]<br>
-     Commit message: [website created assisted by AI with page entry animation]<br>-->
+     Commit message: [website created assisted by AI]<br>-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,12 +15,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bryan Ramirez's Website</title>
     <style>
-        
+       
         :root {
             --bg-color: #f0f4f8;
             --gradient-start: #e6eff7;
             --gradient-end: #ffffff;
-            --dot-color: rgba(46, 117, 182, 0.08); 
+            --dot-color: rgba(46, 117, 182, 0.08);
             --container-bg: rgba(255, 255, 255, 0.92);
             --container-shadow: rgba(31, 78, 121, 0.08);
             --container-border: rgb(0, 0, 0);
@@ -30,12 +30,13 @@
             --timer-bg: #e6eff7;
         }
 
-        
+
+       
         [data-theme="dark"] {
             --bg-color: #0d1117;
             --gradient-start: #161b22;
             --gradient-end: #0d1117;
-            --dot-color: rgba(88, 166, 255, 0.06); 
+            --dot-color: rgba(88, 166, 255, 0.06);
             --container-bg: rgba(22, 27, 34, 0.9);
             --container-shadow: rgba(0, 0, 0, 0.5);
             --container-border: rgba(48, 54, 61, 0.7);
@@ -45,15 +46,16 @@
             --timer-bg: #161b22;
         }
 
-        
+
+       
         body {
             font-family: Arial, sans-serif;
             max-width: 800px;
             margin: 0 auto;
             padding: 80px 20px 40px 20px; /* Top padding leaves space for button */
             background-color: var(--bg-color);
-            background-image: 
-                radial-gradient(var(--dot-color) 1.5px, transparent 1.5px), 
+            background-image:
+                radial-gradient(var(--dot-color) 1.5px, transparent 1.5px),
                 linear-gradient(to bottom, var(--gradient-start), var(--gradient-end));
             background-size: 24px 24px, 100% 100%;
             background-attachment: fixed;
@@ -61,19 +63,8 @@
             transition: background-color 0.3s ease, color 0.3s ease;
         }
 
-        /* Entry Animation (Added feature) */
-        @keyframes fadeInFromAbove {
-            from {
-                opacity: 0;
-                transform: translateY(-40px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
 
-        
+       
         .container {
             background: var(--container-bg);
             padding: 40px;
@@ -81,12 +72,10 @@
             box-shadow: 0 8px 32px var(--container-shadow);
             border: 1px solid var(--container-border);
             transition: background 0.3s ease, box-shadow 0.3s ease, border 0.3s ease;
-            
-            /* Apply animation to container box */
-            animation: fadeInFromAbove 0.8s ease-out forwards;
         }
 
-        
+
+       
         .theme-toggle-btn {
             position: fixed;
             top: 20px;
@@ -102,10 +91,8 @@
             box-shadow: 0 4px 12px var(--container-shadow);
             transition: all 0.2s ease;
             z-index: 1000;
-            
-            /* Apply animation to button so it drops down simultaneously */
-            animation: fadeInFromAbove 0.5s ease-out forwards;
         }
+
 
         .theme-toggle-btn:hover {
             transform: scale(1.05);
@@ -113,7 +100,8 @@
             color: var(--bg-color);
         }
 
-        
+
+       
         .timer-box {
             background-color: var(--timer-bg);
             border: 1px solid var(--container-border);
@@ -124,6 +112,7 @@
             transition: background-color 0.3s ease;
         }
 
+
         .timer-title {
             font-size: 0.9rem;
             font-weight: bold;
@@ -133,12 +122,14 @@
             color: var(--text-secondary);
         }
 
+
         .timer-display {
             font-size: 1.8rem;
             font-weight: bold;
             font-family: monospace, Courier, monospace;
             color: var(--text-primary);
         }
+
 
         /* Styling for the new sub-label underneath the clock numbers */
         .timer-subtitle {
@@ -148,12 +139,14 @@
             color: var(--text-body);
         }
 
+
         h1 {
             color: var(--text-primary);
             margin-top: 0;
             font-size: 2.5rem;
             transition: color 0.3s ease;
         }
+
 
         h2 {
             color: var(--text-secondary);
@@ -163,10 +156,12 @@
             transition: color 0.3s ease, border-color 0.3s ease;
         }
 
+
         p {
             line-height: 1.6;
             font-size: 1.1rem;
         }
+
 
         a {
             color: var(--text-secondary);
@@ -176,6 +171,7 @@
             transition: all 0.2s ease;
         }
 
+
         a:hover {
             color: var(--text-primary);
             border-bottom-style: solid;
@@ -184,12 +180,14 @@
 </head>
 <body>
 
+
     <!-- Fixed theme toggle button positioned in top right -->
-    <button class="theme-toggle-btn" id="themeToggle" onclick="toggleTheme()"> Dark Mode</button>
+    <button class="theme-toggle-btn" id="themeToggle" onclick="toggleTheme()">🌙 Dark Mode</button>
+
 
     <div class="container">
         <h1>Hi, I'm Bryan Ramirez!</h1>
-        
+       
         <!-- Live Countdown Timer Component -->
         <div class="timer-box">
             <div class="timer-title">Countdown to June 30th, 3:45 PM</div>
@@ -198,21 +196,24 @@
             <div class="timer-subtitle">end of senior year class 2027</div>
         </div>
 
+
         <h2>About Me</h2>
         <p>I am an eleventh grader attending Energy Tech Highschool. I play football in my free time occasionally. I plan on doing programs during the summer like SYEP to make money and get work experience.</p>
-        
+       
         <h2>My Interests</h2>
         <p>I enjoy: Chess, football, and biking.<br> My interest in Chess comes from the strategic style of the board game which is the same reason as why I am interested in football since strategy is the most important part. Biking is enjoyable to me because I like the feeling of moving through the wind<br> I mainly Enjoy watching football clubs like Barcelona.</p>
-        
+       
         <h2>My Goals for This Course</h2>
         <p>To create a good portfolio that will mirror my efficiency and show employers my works that I have created online through this website including github and code.org and possibly more.</p>
-        
+       
         <h2>Work values</h2>
         <p>Efficiency and communication are two values that I think are necessary for success in a workplace because being efficient at the work you are given can tell employers you are a valuable to the workplace. Being able to communicate can make you an efficient and important team member when working in a group because communication skills are important when working with people you aren't well versed with. </p>
+
 
         <h2>My GitHub</h2>
         <p>Check out my projects: <a href="https://github.com <br> " target="_blank">msiybna</a></p>
     </div>
+
 
     <!-- Scripts to handle logic features -->
     <script>
@@ -220,13 +221,61 @@
         function toggleTheme() {
             const body = document.body;
             const btn = document.getElementById('themeToggle');
-            
+           
             if (body.getAttribute('data-theme') === 'dark') {
                 body.removeAttribute('data-theme');
                 btn.innerHTML = 'Dark Mode';
+            } else {
+                body.setAttribute('data-theme', 'dark');
+                btn.innerHTML = 'Light Mode';
             }
-            /* The animation CSS code above was added here, keeping everything else exactly the same. */
         }
+
+
+        // 2. Countdown Timer Real-Time Calculation Logic
+        // Fixed Target Date: June 30, 2027 at 15:45 (3:45 PM)
+        const targetDate = new Date("June 30, 2027 15:45:00").getTime();
+
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const difference = targetDate - now;
+
+
+            // If target date is reached or passed
+            if (difference <= 0) {
+                document.getElementById('countdown').innerHTML = "Time's up!";
+                clearInterval(timerInterval);
+                return;
+            }
+
+
+            // Math conversions for days, hours, minutes, and seconds
+            const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+
+            // Format numbers to always show two digits (e.g. 05 instead of 5)
+            const dDisplay = String(days).padStart(2, '0');
+            const hDisplay = String(hours).padStart(2, '0');
+            const mDisplay = String(minutes).padStart(2, '0');
+            const sDisplay = String(seconds).padStart(2, '0');
+
+
+            // Render live text changes directly inside DOM
+            document.getElementById('countdown').innerHTML = `${dDisplay}d ${hDisplay}h ${mDisplay}m ${sDisplay}s`;
+        }
+
+
+        // Run immediately on page load, then refresh every single second
+        updateCountdown();
+        const timerInterval = setInterval(updateCountdown, 1000);
     </script>
+
+
 </body>
 </html>
+
+
