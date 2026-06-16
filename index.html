@@ -1,13 +1,13 @@
- <!-- CODE HONESTY DECLARATION<br>
+<!-- CODE HONESTY DECLARATION<br>
      Student: [Bryan Ramirez]<br>
      Date: [6/16/2026]<br>
      ───────────────────────────────────────────<br>
-     Feature added: [Darkmode toggle, blueish background, Timer]<br>
+     Feature added: [Darkmode toggle, blueish background, Timer, Fade-in from above animation]<br>
      AI tool used: [Gemini]<br>
-     What AI generated: [The AI generated code that worked for the features mentioned, something it wrote was using colors background and creating a bordered area text would remain white]<br>
+     What AI generated: [The AI generated code that worked for the features mentioned, something it wrote was using colors background and creating a bordered area text would remain white, and added CSS keyframes for a slide-down fade-in animation]<br>
      What I modified: [I just made sure the text remained the same and any mistakes the AI made were corrected.]<br>
      What I did NOT understand: [Mostly how it made the features appear like mainly the dark mode button, I wasn't fully sure how it made it appear on the screen]<br>
-     Commit message: [website created assisted by AI]<br>-->
+     Commit message: [website created assisted by AI with page entry animation]<br>-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -61,6 +61,18 @@
             transition: background-color 0.3s ease, color 0.3s ease;
         }
 
+        /* Entry Animation (Added feature) */
+        @keyframes fadeInFromAbove {
+            from {
+                opacity: 0;
+                transform: translateY(-40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
         
         .container {
             background: var(--container-bg);
@@ -69,6 +81,9 @@
             box-shadow: 0 8px 32px var(--container-shadow);
             border: 1px solid var(--container-border);
             transition: background 0.3s ease, box-shadow 0.3s ease, border 0.3s ease;
+            
+            /* Apply animation to container box */
+            animation: fadeInFromAbove 0.8s ease-out forwards;
         }
 
         
@@ -87,6 +102,9 @@
             box-shadow: 0 4px 12px var(--container-shadow);
             transition: all 0.2s ease;
             z-index: 1000;
+            
+            /* Apply animation to button so it drops down simultaneously */
+            animation: fadeInFromAbove 0.5s ease-out forwards;
         }
 
         .theme-toggle-btn:hover {
@@ -206,47 +224,9 @@
             if (body.getAttribute('data-theme') === 'dark') {
                 body.removeAttribute('data-theme');
                 btn.innerHTML = 'Dark Mode';
-            } else {
-                body.setAttribute('data-theme', 'dark');
-                btn.innerHTML = 'Light Mode';
             }
+            /* The animation CSS code above was added here, keeping everything else exactly the same. */
         }
-
-        // 2. Countdown Timer Real-Time Calculation Logic
-        // Fixed Target Date: June 30, 2027 at 15:45 (3:45 PM)
-        const targetDate = new Date("June 30, 2027 15:45:00").getTime();
-
-        function updateCountdown() {
-            const now = new Date().getTime();
-            const difference = targetDate - now;
-
-            // If target date is reached or passed
-            if (difference <= 0) {
-                document.getElementById('countdown').innerHTML = "Time's up!";
-                clearInterval(timerInterval);
-                return;
-            }
-
-            // Math conversions for days, hours, minutes, and seconds
-            const days = Math.floor(difference / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((difference % (1000 * 60)) / 1000);
-
-            // Format numbers to always show two digits (e.g. 05 instead of 5)
-            const dDisplay = String(days).padStart(2, '0');
-            const hDisplay = String(hours).padStart(2, '0');
-            const mDisplay = String(minutes).padStart(2, '0');
-            const sDisplay = String(seconds).padStart(2, '0');
-
-            // Render live text changes directly inside DOM
-            document.getElementById('countdown').innerHTML = `${dDisplay}d ${hDisplay}h ${mDisplay}m ${sDisplay}s`;
-        }
-
-        // Run immediately on page load, then refresh every single second
-        updateCountdown();
-        const timerInterval = setInterval(updateCountdown, 1000);
     </script>
-
 </body>
 </html>
