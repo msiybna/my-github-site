@@ -1,8 +1,8 @@
- <!-- CODE HONESTY DECLARATION<br>
+<!-- CODE HONESTY DECLARATION<br>
      Student: [Bryan Ramirez]<br>
      Date: [6/16/2026]<br>
      ───────────────────────────────────────────<br>
-     Feature added: [Darkmode toggle, blueish background, Timer]<br>
+     Feature added: [Darkmode toggle, blueish background, Timer, Fade-in Downwards Animation]<br>
      AI tool used: [Gemini]<br>
      What AI generated: [The AI generated code that worked for the features mentioned, something it wrote was using colors background and creating a bordered area text would remain white]<br>
      What I modified: [I just made sure the text remained the same and any mistakes the AI made were corrected.]<br>
@@ -72,6 +72,21 @@
             box-shadow: 0 8px 32px var(--container-shadow);
             border: 1px solid var(--container-border);
             transition: background 0.3s ease, box-shadow 0.3s ease, border 0.3s ease;
+            
+            /* Animation properties added here */
+            animation: fadeInDown 1s ease-out forwards;
+        }
+
+        /* Keyframes for the fade-in downwards effect */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
 
@@ -211,7 +226,7 @@
 
 
         <h2>My GitHub</h2>
-        <p>Check out my projects: <a href="https://github.com <br> " target="_blank">msiybna</a></p>
+        <p>Check out my projects: <a href="https://github.com" target="_blank">msiybna</a></p>
     </div>
 
 
@@ -224,58 +239,33 @@
            
             if (body.getAttribute('data-theme') === 'dark') {
                 body.removeAttribute('data-theme');
-                btn.innerHTML = 'Dark Mode';
+                btn.innerText = ' Dark Mode';
             } else {
                 body.setAttribute('data-theme', 'dark');
-                btn.innerHTML = 'Light Mode';
+                btn.innerText = ' Light Mode';
             }
         }
 
-
-        // 2. Countdown Timer Real-Time Calculation Logic
-        // Fixed Target Date: June 30, 2027 at 15:45 (3:45 PM)
+        // 2. Countdown Timer Logic
         const targetDate = new Date("June 30, 2027 15:45:00").getTime();
 
-
-        function updateCountdown() {
+        const countdownInterval = setInterval(function() {
             const now = new Date().getTime();
-            const difference = targetDate - now;
+            const distance = targetDate - now;
 
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-            // If target date is reached or passed
-            if (difference <= 0) {
-                document.getElementById('countdown').innerHTML = "Time's up!";
-                clearInterval(timerInterval);
-                return;
+            document.getElementById("countdown").innerHTML = days + "d " + hours + "h " 
+            + minutes + "m " + seconds + "s ";
+
+            if (distance < 0) {
+                clearInterval(countdownInterval);
+                document.getElementById("countdown").innerHTML = "CLASS OF 2027!";
             }
-
-
-            // Math conversions for days, hours, minutes, and seconds
-            const days = Math.floor(difference / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((difference % (1000 * 60)) / 1000);
-
-
-            // Format numbers to always show two digits (e.g. 05 instead of 5)
-            const dDisplay = String(days).padStart(2, '0');
-            const hDisplay = String(hours).padStart(2, '0');
-            const mDisplay = String(minutes).padStart(2, '0');
-            const sDisplay = String(seconds).padStart(2, '0');
-
-
-            // Render live text changes directly inside DOM
-            document.getElementById('countdown').innerHTML = `${dDisplay}d ${hDisplay}h ${mDisplay}m ${sDisplay}s`;
-        }
-
-
-        // Run immediately on page load, then refresh every single second
-        updateCountdown();
-        const timerInterval = setInterval(updateCountdown, 1000);
+        }, 1000);
     </script>
-
-
 </body>
 </html>
-
-
