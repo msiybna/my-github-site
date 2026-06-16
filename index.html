@@ -112,6 +112,14 @@
             color: var(--text-primary);
         }
 
+        /* Styling for the new sub-label underneath the clock numbers */
+        .timer-subtitle {
+            font-size: 1rem;
+            font-weight: bold;
+            margin-top: 8px;
+            color: var(--text-body);
+        }
+
         h1 {
             color: var(--text-primary);
             margin-top: 0;
@@ -158,6 +166,8 @@
         <div class="timer-box">
             <div class="timer-title">Countdown to June 30th, 3:45 PM</div>
             <div class="timer-display" id="countdown">00d 00h 00m 00s</div>
+            <!-- Label below the timer display numbers -->
+            <div class="timer-subtitle">end of senior year class 2027</div>
         </div>
 
         <h2>About Me</h2>
@@ -190,10 +200,8 @@
         }
 
         // 2. Countdown Timer Real-Time Calculation Logic
-        // Target Date: June 30th at 15:45 (3:45 PM)
-        // Note: The code dynamic target matches the current calendar year cleanly
-        const targetYear = new Date().getFullYear();
-        const targetDate = new Date(`June 30, ${targetYear} 15:45:00`).getTime();
+        // Fixed Target Date: June 30, 2027 at 15:45 (3:45 PM)
+        const targetDate = new Date("June 30, 2027 15:45:00").getTime();
 
         function updateCountdown() {
             const now = new Date().getTime();
